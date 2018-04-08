@@ -1,0 +1,32 @@
+{
+  "name": "angularjs-pwa",
+  "version": "0.0.1",
+  "description": "Progressive web app on angularjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pwa",
+    "angular",
+    "spa"
+  ],
+  "author": "Alexander Fedotov",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "~1.6.6",
+    "angular-ui-router": "~0.4.2",
+    "koa": "^2.5.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^4.0.2",
+    "oclazyload": "^1.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-copy": "^1.1.0",
+    "gulp-uglify": "^3.0.0"
+  }
+}
