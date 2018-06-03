@@ -10,10 +10,31 @@ const options = {
 	cert:  fs.readFileSync('./config/server.crt')
 };
 
-app.use(serve('./src'));
+const { HTTP2_HEADER_PATH } = http2.constants;
+const mime = require('mime');
+const push = (stream, path) => {
+	const filePath = `$(__dirname)/src/${path}`;
+	const file = {
+		content: () => fs.openSync(filePath),
+		headers: {
+			'content-type': () => mime.getType(filePath)
+		}
+	};
+	if (!file) {
+		return;
+	}
+	stream.pushStream({ [HTTP2_HEADER_PATH]: path }, (pushStream) => {
+		pushStream.respondWithFD(file.content, file.headers)
+		
+	});
+}
 
+app.use(serve('./src'));
+router.get('/test', require('./test').get);
 app.use(router.routes());
-// app.listen(5001);
+
+
+
 http2.createSecureServer(options, app.callback()).listen(5001);
 
 // let server = http.createServer( (req ,res) => {
